@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impresoras Portátiles de Codificación Industrial — Plan de Negocio</title>
+<style>
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --text: #0a0f1a;
+  --text-secondary: #4a5568;
+  --accent: #1e3a5f;
+  --gold: #c9953c;
+  --success: #1a7a4c;
+  --danger: #b91c1c;
+  --bg-white: #ffffff;
+  --bg-pearl: #f8f9fc;
+  --border: #e8eaed;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.10);
+  --radius: 12px;
+  --font: -apple-system, 'SF Pro Display', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --max-w: 880px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg-white);
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   DECK SECTION (scroll-snap)
+   ============================================ */
+#deck {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  position: relative;
+}
+
+.slide:nth-child(even) { background: var(--bg-pearl); }
+.slide:nth-child(odd) { background: var(--bg-white); }
+
+.slide-inner {
+  max-width: var(--max-w);
+  width: 100%;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1 {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+p, li {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.subtitle {
+  font-size: 20px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.big-number {
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.gold-line {
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  margin: 24px 0;
+  border-radius: 2px;
+}
+
+.gold-line-center {
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  margin: 24px auto;
+  border-radius: 2px;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.card {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .card-grid-2, .card-grid-3, .card-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-featured {
+  border: 2px solid var(--accent);
+  position: relative;
+}
+
+.card-featured::before {
+  content: 'PRINCIPAL';
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+}
+
+th {
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--accent);
+}
+
+td {
+  padding: 14px 16px;
+  font-size: 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+tr:last-child td { border-bottom: none; }
+
+tbody tr {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+tbody tr.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   PROGRESS BARS
+   ============================================ */
+.bar-container {
+  margin: 12px 0;
+}
+
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.bar-track {
+  height: 8px;
+  background: #edf2f7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bar-fill-accent { background: linear-gradient(90deg, var(--accent), #2d5a8e); }
+.bar-fill-gold { background: linear-gradient(90deg, var(--gold), #d4a94e); }
+.bar-fill-success { background: linear-gradient(90deg, var(--success), #22925f); }
+
+/* ============================================
+   DONUT CHART (CSS conic-gradient)
+   ============================================ */
+.donut-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin: 32px 0;
+}
+
+.donut {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.donut::after {
+  content: '';
+  position: absolute;
+  inset: 30px;
+  background: var(--bg-white);
+  border-radius: 50%;
+}
+
+.donut-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ============================================
+   PRICE LADDER
+   ============================================ */
+.ladder {
+  position: relative;
+  padding-left: 40px;
+}
+
+.ladder-item {
+  position: relative;
+  padding: 16px 0 16px 24px;
+  border-left: 2px solid var(--border);
+}
+
+.ladder-item::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 22px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--border);
+  border: 2px solid var(--bg-white);
+}
+
+.ladder-item.ladder-us::before {
+  background: var(--accent);
+  width: 16px;
+  height: 16px;
+  left: -9px;
+  top: 20px;
+  box-shadow: 0 0 0 4px rgba(30,58,95,0.15);
+}
+
+.ladder-item.ladder-us {
+  border-left-color: var(--accent);
+}
+
+/* ============================================
+   NAVIGATION DOTS
+   ============================================ */
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  padding: 0;
+}
+
+.nav-dot.active {
+  background: var(--gold);
+  transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+  .nav-dots { display: none; }
+}
+
+/* ============================================
+   ANIMATIONS (Intersection Observer)
+   ============================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.stagger > * { transition-delay: calc(var(--i, 0) * 0.1s); }
+
+/* ============================================
+   COVER SLIDE
+   ============================================ */
+.cover-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.cover-metric {
+  text-align: center;
+}
+
+.cover-metric .big-number {
+  color: var(--accent);
+}
+
+.cover-metric .label {
+  margin-top: 8px;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .cover-metrics { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ============================================
+   COMPARISON TABLE (Slide 8)
+   ============================================ */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 32px 0;
+}
+
+.comparison-col {
+  padding: 32px;
+}
+
+.comparison-col:first-child {
+  background: #fafafa;
+  border-right: 1px solid var(--border);
+}
+
+.comparison-col:last-child {
+  background: var(--bg-white);
+}
+
+.comparison-row {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.comparison-row:last-child { border-bottom: none; }
+
+.comparison-header {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.comparison-header-us {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.check { color: var(--success); font-weight: 600; }
+.cross { color: var(--danger); font-weight: 600; }
+
+@media (max-width: 600px) {
+  .comparison { grid-template-columns: 1fr; }
+  .comparison-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* ============================================
+   TEAM CARDS
+   ============================================ */
+.team-card {
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.team-initials {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #2d5a8e);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  letter-spacing: 0.02em;
+}
+
+.team-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.team-role {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   CLOSING SLIDE
+   ============================================ */
+.closing {
+  text-align: center;
+}
+
+.closing h2 {
+  font-size: clamp(32px, 5vw, 52px);
+  margin-bottom: 32px;
+}
+
+.closing .team-list {
+  list-style: none;
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 2;
+}
+
+/* ============================================
+   PLAN SECTION (after deck — normal scroll)
+   ============================================ */
+#plan {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+#plan h2 {
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+#plan h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+#plan h3 {
+  margin-top: 40px;
+}
+
+#plan p {
+  margin-bottom: 16px;
+}
+
+#plan ul, #plan ol {
+  margin: 16px 0;
+  padding-left: 24px;
+}
+
+#plan li {
+  margin-bottom: 8px;
+}
+
+#plan table {
+  margin: 24px 0;
+}
+
+#plan .card {
+  margin: 24px 0;
+}
+
+.plan-divider {
+  text-align: center;
+  padding: 80px 24px;
+  background: var(--bg-pearl);
+}
+
+.plan-divider h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 8px;
+}
+
+.plan-divider p {
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.note-box {
+  background: #fffbeb;
+  border: 1px solid #f6e5a3;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  font-size: 15px;
+  color: #92400e;
+  margin: 24px 0;
+}
+
+.highlight-box {
+  background: var(--bg-pearl);
+  border-left: 4px solid var(--accent);
+  padding: 24px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 24px 0;
+}
+
+.risk-table td:first-child { font-weight: 600; color: var(--text); }
+
+/* ============================================
+   BAR CHART (horizontal)
+   ============================================ */
+.h-bar-chart {
+  margin: 32px 0;
+}
+
+.h-bar-item {
+  margin-bottom: 20px;
+}
+
+.h-bar-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.h-bar-track {
+  height: 32px;
+  background: #edf2f7;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.h-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  width: 0;
+  transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   PRINT
+   ============================================ */
+@media print {
+  #deck {
+    scroll-snap-type: none;
+    overflow: visible;
+    height: auto;
+  }
+  .slide {
+    min-height: auto;
+    scroll-snap-align: none;
+    page-break-after: always;
+    padding: 40px 20px;
+  }
+  .nav-dots { display: none !important; }
+  .fade-up { opacity: 1 !important; transform: none !important; }
+  .bar-fill, .h-bar-fill { transition: none !important; }
+  tbody tr { opacity: 1 !important; transform: none !important; }
+  .card:hover { transform: none; box-shadow: var(--shadow); }
+  body { font-size: 14px; }
+  h1 { font-size: 36px; }
+  h2 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION DOTS
+     ============================================ -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ============================================
+     DECK: 11 SLIDES
+     ============================================ -->
+<div id="deck">
+
+<!-- ==================== SLIDE 1: COVER ==================== -->
+<section class="slide" data-slide="0">
+  <div class="slide-inner fade-up">
+    <div class="label">Plan de Negocio</div>
+    <h1>Impresoras Portátiles de Codificación Industrial</h1>
+    <p class="subtitle">Plan de Negocio &middot; Marzo 2026</p>
+    <div class="gold-line"></div>
+    <div class="cover-metrics">
+      <div class="cover-metric">
+        <div class="big-number">$2.38M</div>
+        <span class="label">Ventas Año 1 (MXN)</span>
+      </div>
+      <div class="cover-metric">
+        <div class="big-number" style="color: var(--success);">67%</div>
+        <span class="label">Margen Bruto</span>
+      </div>
+      <div class="cover-metric">
+        <div class="big-number" style="color: var(--gold);">467%</div>
+        <span class="label">Retorno sobre Inversión</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 2: EL PROBLEMA ==================== -->
+<section class="slide" data-slide="1">
+  <div class="slide-inner">
+    <div class="fade-up">
+      <div class="label">El Problema</div>
+      <h2>650,000 negocios obligados a codificar. Solo 2 opciones.</h2>
+      <p class="subtitle">La NOM-051 exige que toda empresa de alimentos imprima fecha de elaboración, caducidad y lote. Las multas van de $3,000 a $2,000,000 MXN.</p>
+    </div>
+    <div class="card-grid card-grid-3 fade-up stagger" style="margin-top: 40px;">
+      <div class="card" style="--i:0; text-align:center;">
+        <h4>Manual</h4>
+        <div style="font-size:32px; font-weight:700; color: var(--danger); margin: 16px 0;">$100-750/día</div>
+        <p style="font-size:15px;">Etiquetas, stickers, escritura a mano. Inconsistente, lento, propenso a error. Las etiquetas se caen con humedad y aceite.</p>
+      </div>
+      <div class="card" style="--i:1; border: 2px solid var(--gold); text-align:center;">
+        <h4 style="color: var(--gold);">Las PyMEs</h4>
+        <div style="font-size:32px; font-weight:700; color: var(--gold); margin: 16px 0;">?</div>
+        <p style="font-size:15px;">No existe una opción profesional y accesible. Hay un vacío entre lo manual y lo industrial que nadie atiende.</p>
+      </div>
+      <div class="card" style="--i:2; text-align:center;">
+        <h4>Industrial</h4>
+        <div style="font-size:32px; font-weight:700; color: var(--text); margin: 16px 0;">$25,000+</div>
+        <p style="font-size:15px;">Videojet, Domino, Markem-Imaje. Equipos de $25,000 a $200,000 MXN. Inalcanzables para la pequeña empresa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 3: LA SOLUCIÓN ==================== -->
+<section class="slide" data-slide="2">
+  <div class="slide-inner">
+    <div class="fade-up">
+      <div class="label">La Solución</div>
+      <h2>Tres modelos. Importación directa. Se pagan en 2 a 4 semanas.</h2>
+    </div>
+    <div class="card-grid card-grid-3 fade-up stagger" style="margin-top:32px;">
+      <!-- M05 -->
+      <div class="card" style="--i:0;">
+        <h4>Modelo M05</h4>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Entry-level</div>
+        <div style="font-size:36px;font-weight:700;color:var(--text);margin-bottom:4px;">$2,190</div>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">MXN</div>
+        <ul style="font-size:14px;list-style:none;padding:0;color:var(--text-secondary);">
+          <li style="margin-bottom:6px;">Pantalla LCD 2.4"</li>
+          <li style="margin-bottom:6px;">25 idiomas</li>
+          <li style="margin-bottom:6px;">Superficies curvas</li>
+          <li style="margin-bottom:6px;">USB</li>
+        </ul>
+        <div class="bar-container" style="margin-top:20px;">
+          <div class="bar-label"><span>Margen</span><span style="color:var(--success);">59%</span></div>
+          <div class="bar-track"><div class="bar-fill bar-fill-success" data-width="59"></div></div>
+        </div>
+      </div>
+      <!-- MT1 (Featured) -->
+      <div class="card card-featured" style="--i:1;">
+        <h4>Modelo MT1</h4>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Producto estrella</div>
+        <div style="font-size:36px;font-weight:700;color:var(--accent);margin-bottom:4px;">$4,490</div>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">MXN</div>
+        <ul style="font-size:14px;list-style:none;padding:0;color:var(--text-secondary);">
+          <li style="margin-bottom:6px;">Pantalla táctil 2.8"</li>
+          <li style="margin-bottom:6px;">Bluetooth</li>
+          <li style="margin-bottom:6px;">Superficies curvas</li>
+          <li style="margin-bottom:6px;">Boot screen personalizable</li>
+        </ul>
+        <div class="bar-container" style="margin-top:20px;">
+          <div class="bar-label"><span>Margen</span><span style="color:var(--success);">72%</span></div>
+          <div class="bar-track"><div class="bar-fill bar-fill-success" data-width="72"></div></div>
+        </div>
+      </div>
+      <!-- MH08 -->
+      <div class="card" style="--i:2;">
+        <h4>Modelo MH08</h4>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Industrial / Premium</div>
+        <div style="font-size:36px;font-weight:700;color:var(--text);margin-bottom:4px;">$6,990</div>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">MXN</div>
+        <ul style="font-size:14px;list-style:none;padding:0;color:var(--text-secondary);">
+          <li style="margin-bottom:6px;">Pantalla 2.5"</li>
+          <li style="margin-bottom:6px;">Bluetooth</li>
+          <li style="margin-bottom:6px;">Carcasa metálica</li>
+          <li style="margin-bottom:6px;">Diseño industrial</li>
+        </ul>
+        <div class="bar-container" style="margin-top:20px;">
+          <div class="bar-label"><span>Margen</span><span style="color:var(--success);">77%</span></div>
+          <div class="bar-track"><div class="bar-fill bar-fill-success" data-width="77"></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="fade-up" style="margin-top:32px;font-size:16px;color:var(--text-secondary);text-align:center;">Importación directa de fábrica en China. Cartuchos TIJ 2.5 estándar (HP45 compatible). Resolución 300-600 DPI.</p>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 4: MODELO DE CONSUMIBLES ==================== -->
+<section class="slide" data-slide="3">
+  <div class="slide-inner">
+    <div class="fade-up">
+      <div class="label">Modelo de Consumibles</div>
+      <h2>La impresora abre la puerta.<br>Las tintas son el negocio.</h2>
+    </div>
+
+    <!-- Bar chart: Hardware vs Tintas -->
+    <div class="fade-up" style="margin-top:40px;">
+      <p style="font-size:16px;color:var(--text-secondary);margin-bottom:24px;">Ingresos anuales estimados con 100 clientes:</p>
+      <div class="h-bar-chart">
+        <div class="h-bar-item">
+          <div class="h-bar-label"><span>Hardware (venta única)</span><span>$449,000 MXN</span></div>
+          <div class="h-bar-track"><div class="h-bar-fill bar-fill-accent" data-width="27" style="min-width:80px;">$449K</div></div>
+        </div>
+        <div class="h-bar-item">
+          <div class="h-bar-label"><span>Tintas (recurrente anual)</span><span>$1,680,000 MXN</span></div>
+          <div class="h-bar-track"><div class="h-bar-fill bar-fill-gold" data-width="100" style="min-width:80px;">$1,680K</div></div>
+        </div>
+      </div>
+      <p style="font-size:20px;font-weight:600;color:var(--accent);margin-top:16px;">Las tintas generan 3.7 veces más ingresos que el hardware.</p>
+    </div>
+
+    <div class="card-grid card-grid-2 fade-up" style="margin-top:40px;">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:40px;font-weight:700;color:var(--accent);">36-60</div>
+        <p style="font-size:15px;margin-top:8px;">cartuchos por cliente al año</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:40px;font-weight:700;color:var(--gold);">$21,290</div>
+        <p style="font-size:15px;margin-top:8px;">gasto promedio por cliente en el primer año</p>
+      </div>
+    </div>
+
+    <!-- Ink types table -->
+    <div class="fade-up" style="margin-top:40px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo de Tinta</th>
+            <th>Precio MXN</th>
+            <th>Margen</th>
+            <th>Aplicación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-weight:600;color:var(--text);">Negro solvente</td><td>$350-400</td><td style="color:var(--success);">65-80%</td><td>Plástico, metal, vidrio</td></tr>
+          <tr><td style="font-weight:600;color:var(--text);">Negro base agua</td><td>$250-300</td><td style="color:var(--success);">60-75%</td><td>Cartón, papel, madera</td></tr>
+          <tr><td style="font-weight:600;color:var(--text);">Blanco pigmentado</td><td>$500-600</td><td style="color:var(--success);">70-80%</td><td>Superficies oscuras</td></tr>
+          <tr><td style="font-weight:600;color:var(--text);">Grado alimenticio</td><td>$600-800</td><td style="color:var(--success);">60-70%</td><td>Contacto directo alimentos</td></tr>
+          <tr><td style="font-weight:600;color:var(--text);">UV invisible</td><td>$900-1,200</td><td style="color:var(--success);">70-85%</td><td>Anti-falsificación</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 5: EL MERCADO ==================== -->
+<section class="slide" data-slide="4">
+  <div class="slide-inner">
+    <div class="fade-up">
+      <div class="label">El Mercado</div>
+      <h2>Un mercado global de $17,500 millones de dólares.</h2>
+      <p class="subtitle">El mercado de codificación y marcaje industrial crece entre 6% y 10% anual. México es el país con mayor crecimiento en Norteamérica.</p>
+    </div>
+
+    <div class="card-grid card-grid-2 fade-up stagger" style="margin-top: 32px;">
+      <div class="card" style="--i:0;">
+        <div class="label">Mercado Global 2024</div>
+        <div style="font-size:36px;font-weight:700;color:var(--accent);margin:12px 0;">$17,500 MDD</div>
+        <p style="font-size:15px;">Proyección 2030: $25,000 millones de dólares. La tecnología TIJ (inyección térmica) es el segmento de mayor crecimiento.</p>
+      </div>
+      <div class="card" style="--i:1;">
+        <div class="label">Crecimiento Anual</div>
+        <div style="font-size:36px;font-weight:700;color:var(--success);margin:12px 0;">6% - 10.4%</div>
+        <p style="font-size:15px;">Según Grand View Research y Allied Market Research. Norteamérica generó $5,421 millones de dólares en ingresos en 2024.</p>
+      </div>
+    </div>
+
+    <div class="fade-up" style="margin-top:40px;">
+      <h3>Factores de crecimiento en México</h3>
+      <div style="margin-top:16px;">
+        <div style="display:flex;gap:12px;align-items:baseline;margin-bottom:12px;">
+          <span style="color:var(--accent);font-weight:700;font-size:20px;">1</span>
+          <p style="font-size:16px;margin:0;"><strong>NOM-051 y NOM-137</strong> obligan a toda empresa de alimentos y farmacéutica a codificar sus productos.</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:baseline;margin-bottom:12px;">
+          <span style="color:var(--accent);font-weight:700;font-size:20px;">2</span>
+          <p style="font-size:16px;margin:0;"><strong>Nearshoring</strong> impulsa la manufactura mexicana. El país puede agregar 3% adicional al PIB en los próximos 5 años.</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:baseline;margin-bottom:12px;">
+          <span style="color:var(--accent);font-weight:700;font-size:20px;">3</span>
+          <p style="font-size:16px;margin:0;"><strong>Manufactura creció 5.2% anual en 2022</strong>, el doble del promedio histórico. 48% de la inversión extranjera directa va a manufactura.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 6: INDUSTRIAS OBJETIVO ==================== -->
+<section class="slide" data-slide="5">
+  <div class="slide-inner">
+    <div class="fade-up">
+      <div class="label">Industrias Objetivo</div>
+      <h2>Tres sectores que representan más del 75% del mercado.</h2>
+    </div>
+    <div class="card-grid card-grid-3 fade-up stagger" style="margin-top:32px;">
+      <div class="card" style="--i:0;">
+        <h4>Alimentos y Bebidas</h4>
+        <div style="font-size:32px;font-weight:700;color:var(--accent);margin:16px 0;">250,000+</div>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:12px;">establecimientos con necesidad de codificación diaria</p>
+        <div style="font-size:14px;color:var(--text-secondary);">
+          <p style="margin-bottom:8px;"><strong>Regulación:</strong> NOM-051 (fecha, lote, caducidad)</p>
+          <p style="margin-bottom:8px;"><strong>Consumo:</strong> 36-60 cartuchos por cliente al año</p>
+          <p><strong>Subsegmentos:</strong> Panaderías, tortillerías, lecherías, productores de salsas</p>
+        </div>
+      </div>
+      <div class="card" style="--i:1;">
+        <h4>Manufactura</h4>
+        <div style="font-size:32px;font-weight:700;color:var(--accent);margin:16px 0;">12,000+</div>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:12px;">plantas manufactureras en México</p>
+        <div style="font-size:14px;color:var(--text-secondary);">
+          <p style="margin-bottom:8px;"><strong>Crecimiento:</strong> 5.2% anual, impulsado por nearshoring</p>
+          <p style="margin-bottom:8px;"><strong>Dolor:</strong> Marcado manual genera rechazos de hasta $2M MXN/día</p>
+          <p><strong>Subsegmentos:</strong> Autopartes, electrónica, plásticos, metalmecánica</p>
+        </div>
+      </div>
+      <div class="card" style="--i:2;">
+        <h4>Farmacéutica</h4>
+        <div style="font-size:32px;font-weight:700;color:var(--accent);margin:16px 0;">$450,000M</div>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:12px;">MXN de ingresos anuales del sector</p>
+        <div style="font-size:14px;color:var(--text-secondary);">
+          <p style="margin-bottom:8px;"><strong>Regulación:</strong> NOM-137 (serialización en desarrollo)</p>
+          <p style="margin-bottom:8px;"><strong>Multas:</strong> Hasta $2,000,000 MXN + suspensión de licencia</p>
+          <p><strong>Subsegmentos:</strong> Farmacias de compounding, laboratorios, hospitales</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 7: COMPETENCIA ==================== -->
+<section class="slide" data-slide="6">
+  <div class="slide-inner">
+    <div class="fade-up">
+      <div class="label">Competencia</div>
+      <h2>Un gap de precio donde nadie compite.</h2>
+    </div>
+
+    <!-- Price Ladder -->
+    <div class="fade-up" style="margin-top:32px;">
+      <div class="ladder">
+        <div class="ladder-item">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:15px;font-weight:600;color:var(--text);">$1,500 - $3,500 MXN</div>
+              <div style="font-size:14px;color:var(--text-secondary);">Phezer, Rigel, Bentsai B10 — Básicos, soporte limitado, calidad inconsistente</div>
+            </div>
+          </div>
+        </div>
+        <div class="ladder-item ladder-us">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:17px;font-weight:700;color:var(--accent);">$4,000 - $7,000 MXN — NOSOTROS</div>
+              <div style="font-size:14px;color:var(--accent);">Rango sin competencia fuerte. Mejor producto, mejor soporte, infraestructura tecnológica.</div>
+            </div>
+          </div>
+        </div>
+        <div class="ladder-item">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:15px;font-weight:600;color:var(--text);">$25,000+ MXN</div>
+              <div style="font-size:14px;color:var(--text-secondary);">Videojet, Domino, Markem-Imaje — Equipos industriales, inalcanzables para PyMEs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- vs Bentsai -->
+    <div class="fade-up" style="margin-top:48px;">
+      <h3>Nosotros vs. Bentsai (líder actual)</h3>
+      <table style="margin-top:16px;">
+        <thead>
+          <tr><th>Factor</th><th>Bentsai</th><th style="color:var(--accent);">Nosotros</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-weight:600;color:var(--text);">Cartuchos</td><td class="cross">Firmware bloquea cartuchos de terceros</td><td class="check">Cartuchos abiertos TIJ 2.5</td></tr>
+          <tr><td style="font-weight:600;color:var(--text);">Soporte en español</td><td class="cross">Limitado, "no garantizado"</td><td class="check">100% español, WhatsApp 24h</td></tr>
+          <tr><td style="font-weight:600;color:var(--text);">Automatización</td><td class="cross">Ninguna</td><td class="check">Listados IA, pricing dinámico, CRM</td></tr>
+          <tr><td style="font-weight:600;color:var(--text);">Precios</td><td class="cross">Opacos, requieren contacto</td><td class="check">Publicados, transparentes</td></tr>
+          <tr><td style="font-weight:600;color:var(--text);">Documentación</td><td class="cross">Incompleta en español</td><td class="check">100% en español</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 8: TRANSFORMACIÓN DIGITAL ==================== -->
+<section class="slide" data-slide="7">
+  <div class="slide-inner">
+    <div class="fade-up">
+      <div class="label">Ventaja Competitiva</div>
+      <h2>No solo vendemos impresoras.<br>Operamos como empresa de tecnología.</h2>
+      <p class="subtitle">Somos la única empresa de impresoras portátiles en México con infraestructura de transformación digital completa.</p>
+    </div>
+
+    <div class="card-grid card-grid-2 fade-up stagger" style="margin-top:32px;">
+      <div class="card" style="--i:0;">
+        <h4>Atención al Cliente con IA</h4>
+        <ul style="font-size:14px;list-style:none;padding:0;color:var(--text-secondary);">
+          <li style="margin-bottom:8px;">Chatbots inteligentes en WhatsApp, Mercado Libre y sitio web</li>
+          <li style="margin-bottom:8px;">Diagnóstico por foto: el cliente manda imagen del problema y recibe solución</li>
+          <li style="margin-bottom:8px;">Guías personalizadas según modelo de impresora</li>
+          <li style="margin-bottom:8px;">Soporte 24/7 sin equipo grande de atención</li>
+          <li>Gestión automatizada de garantías y reembolsos</li>
+        </ul>
+      </div>
+      <div class="card" style="--i:1;">
+        <h4>Operaciones Automatizadas</h4>
+        <ul style="font-size:14px;list-style:none;padding:0;color:var(--text-secondary);">
+          <li style="margin-bottom:8px;">Listados de Mercado Libre optimizados con IA (títulos, descripciones, SEO)</li>
+          <li style="margin-bottom:8px;">Pricing dinámico: monitoreo automático de competencia</li>
+          <li style="margin-bottom:8px;">Gestión de inventario predictiva</li>
+          <li style="margin-bottom:8px;">Alertas de recompra: "tu cartucho se acaba pronto"</li>
+          <li>CRM automatizado con seguimiento por cliente</li>
+        </ul>
+      </div>
+      <div class="card" style="--i:2;">
+        <h4>Inteligencia de Mercado</h4>
+        <ul style="font-size:14px;list-style:none;padding:0;color:var(--text-secondary);">
+          <li style="margin-bottom:8px;">Análisis automático de reseñas de competidores</li>
+          <li style="margin-bottom:8px;">Detección de tendencias de demanda por sector</li>
+          <li>Tableros en tiempo real de ventas, márgenes e inventario</li>
+        </ul>
+      </div>
+      <div class="card" style="--i:3;">
+        <h4>Sistemas Multi-Agente</h4>
+        <ul style="font-size:14px;list-style:none;padding:0;color:var(--text-secondary);">
+          <li style="margin-bottom:8px;">Múltiples agentes de IA que cubren ventas, soporte, operaciones y análisis</li>
+          <li style="margin-bottom:8px;">Cada proceso tiene su agente especializado</li>
+          <li>Operamos con la eficiencia de 20 personas siendo 4</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="fade-up" style="margin-top:40px;">
+      <div class="comparison">
+        <div class="comparison-col">
+          <div class="comparison-header">Operación Tradicional</div>
+          <div class="comparison-row">Atención por teléfono y correo</div>
+          <div class="comparison-row">Listados manuales en marketplaces</div>
+          <div class="comparison-row">Precios fijos, ajuste manual</div>
+          <div class="comparison-row">Sin seguimiento post-venta</div>
+          <div class="comparison-row">Equipo de 15-20 personas</div>
+          <div class="comparison-row">Tiempo de respuesta: horas</div>
+        </div>
+        <div class="comparison-col">
+          <div class="comparison-header comparison-header-us">Nuestra Operación</div>
+          <div class="comparison-row check">IA multicanal 24/7 con diagnóstico visual</div>
+          <div class="comparison-row check">Listados optimizados automáticamente</div>
+          <div class="comparison-row check">Pricing dinámico en tiempo real</div>
+          <div class="comparison-row check">Alertas de recompra y CRM automatizado</div>
+          <div class="comparison-row check">Equipo de 4 personas</div>
+          <div class="comparison-row check">Tiempo de respuesta: minutos</div>
+        </div>
+      </div>
+      <p style="font-size:16px;color:var(--accent);font-weight:600;text-align:center;margin-top:16px;">Reducción de costos operativos del 60-70% frente a la competencia tradicional.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 9: PROYECCIÓN FINANCIERA ==================== -->
+<section class="slide" data-slide="8">
+  <div class="slide-inner">
+    <div class="fade-up">
+      <div class="label">Proyección Financiera</div>
+      <h2>Primeros 6 meses — escenario conservador.</h2>
+    </div>
+
+    <div class="fade-up" style="margin-top:32px;overflow-x:auto;">
+      <table>
+        <thead>
+          <tr><th>Mes</th><th>Impresoras</th><th>Ventas Totales</th><th>Utilidad Bruta</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>5</td><td>$27,700</td><td style="color:var(--success);">$18,900</td></tr>
+          <tr><td>2</td><td>5</td><td>$32,950</td><td style="color:var(--success);">$22,350</td></tr>
+          <tr><td>3</td><td>15</td><td>$93,600</td><td style="color:var(--success);">$63,600</td></tr>
+          <tr><td>4</td><td>15</td><td>$109,350</td><td style="color:var(--success);">$73,950</td></tr>
+          <tr><td>5</td><td>25</td><td>$180,500</td><td style="color:var(--success);">$126,100</td></tr>
+          <tr><td>6</td><td>25</td><td>$210,250</td><td style="color:var(--success);">$148,650</td></tr>
+          <tr style="font-weight:700;"><td style="color:var(--text);font-weight:700;">Total</td><td style="color:var(--text);font-weight:700;">90</td><td style="color:var(--text);font-weight:700;">$654,350</td><td style="color:var(--success);font-weight:700;">$453,550</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-grid card-grid-3 fade-up" style="margin-top:32px;">
+      <div class="card" style="text-align:center;">
+        <div class="label">Punto de Equilibrio</div>
+        <div style="font-size:36px;font-weight:700;color:var(--accent);margin-top:8px;">Mes 1</div>
+        <p style="font-size:14px;margin-top:4px;">Con 5 unidades vendidas</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="label">Retorno sobre Inversión</div>
+        <div style="font-size:36px;font-weight:700;color:var(--success);margin-top:8px;">467%</div>
+        <p style="font-size:14px;margin-top:4px;">En 6 meses</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="label">Ventas Año 1</div>
+        <div style="font-size:36px;font-weight:700;color:var(--gold);margin-top:8px;">$2.38M</div>
+        <p style="font-size:14px;margin-top:4px;">MXN (~$140,000 USD)</p>
+      </div>
+    </div>
+
+    <div class="note-box fade-up" style="margin-top:24px;">
+      Nota: Estas proyecciones son antes de comisiones de marketplace (~18%) e impuestos. Incluyen ingresos por hardware y tintas combinados.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 10: EL EQUIPO ==================== -->
+<section class="slide" data-slide="9">
+  <div class="slide-inner">
+    <div class="fade-up">
+      <div class="label">El Equipo</div>
+      <h2>Cuatro socios. Capacidades complementarias.</h2>
+    </div>
+    <div class="card-grid card-grid-4 fade-up stagger" style="margin-top:40px;">
+      <div class="card team-card" style="--i:0;">
+        <div class="team-initials">RZ</div>
+        <div class="team-name">Raul Zhou</div>
+        <div class="team-role">Tecnología y Automatización</div>
+      </div>
+      <div class="card team-card" style="--i:1;">
+        <div class="team-initials">K</div>
+        <div class="team-name">Kaori</div>
+        <div class="team-role">Sourcing y Proveedores China</div>
+      </div>
+      <div class="card team-card" style="--i:2;">
+        <div class="team-initials">D</div>
+        <div class="team-name">Diego</div>
+        <div class="team-role">Operaciones y Logística</div>
+      </div>
+      <div class="card team-card" style="--i:3;">
+        <div class="team-initials">DV</div>
+        <div class="team-name">Dante Vega</div>
+        <div class="team-role">Ventas y Marketing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SLIDE 11: CIERRE ==================== -->
+<section class="slide" data-slide="10">
+  <div class="slide-inner closing fade-up">
+    <div class="gold-line-center"></div>
+    <h2>Gracias por su tiempo.</h2>
+    <div class="gold-line-center"></div>
+    <ul class="team-list" style="margin-top:40px;">
+      <li>Raul Zhou</li>
+      <li>Kaori</li>
+      <li>Diego</li>
+      <li>Dante Vega</li>
+    </ul>
+  </div>
+</section>
+
+</div><!-- end #deck -->
+
+<!-- ============================================
+     PLAN DIVIDER
+     ============================================ -->
+<div class="plan-divider">
+  <div class="gold-line-center"></div>
+  <h2>Plan de Negocio Completo</h2>
+  <p>Documento detallado con análisis de mercado, financieros y estrategia de ejecución.</p>
+  <div class="gold-line-center"></div>
+</div>
+
+<!-- ============================================
+     PLAN DE NEGOCIO COMPLETO
+     ============================================ -->
+<div id="plan">
+
+<!-- 1. RESUMEN EJECUTIVO -->
+<h2>1. Resumen Ejecutivo</h2>
+<p>Somos un equipo de 4 socios que comercializará <strong>impresoras portátiles de inyección de tinta TIJ 2.5</strong> importadas directamente de fábrica en China, enfocadas en el mercado mexicano de codificación y marcaje industrial.</p>
+
+<div class="highlight-box">
+  <p style="margin:0;"><strong>Qué vendemos:</strong> Impresoras portátiles para codificación de fechas, lotes, códigos de barras y QR, con un ecosistema de tintas recurrentes como motor principal de ingresos.</p>
+</div>
+
+<p><strong>A quién:</strong> Pequeñas y medianas empresas mexicanas en alimentos (NOM-051), manufactura y farmacéutica, que representan más del 75% del mercado direccionable.</p>
+
+<p><strong>Por qué ganamos:</strong></p>
+<ol>
+  <li><strong>Precio imbatible:</strong> Entramos en el rango de $4,000-$7,000 MXN donde no hay competidor fuerte.</li>
+  <li><strong>Infraestructura tecnológica:</strong> Automatización de listados, pricing dinámico, chatbot con IA, CRM. Ningún competidor local tiene esto.</li>
+  <li><strong>Modelo de consumibles:</strong> La impresora es el vehículo; las tintas son el negocio recurrente con márgenes de 60-80%.</li>
+  <li><strong>Sourcing directo:</strong> Relación directa con fabricantes en China para precios de fábrica.</li>
+</ol>
+
+<p><strong>Cifras clave:</strong></p>
+<table>
+  <tbody>
+    <tr><td style="font-weight:600;color:var(--text);">Mercado global 2024</td><td>$17,500 millones de dólares</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Crecimiento anual</td><td>6% - 10.4%</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Ventas proyectadas Año 1</td><td>$2,382,500 MXN</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Margen bruto</td><td>67%</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Inversión inicial</td><td>$60,000-$100,000 MXN</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Retorno sobre inversión (6 meses)</td><td>467%</td></tr>
+  </tbody>
+</table>
+
+<!-- 2. EL MERCADO -->
+<h2>2. El Mercado</h2>
+
+<h3>2.1 Mercado Global</h3>
+<p>El mercado global de codificación y marcaje industrial alcanzó los <strong>$17,528 millones de dólares en 2024</strong> (Grand View Research), con proyección de alcanzar $24,927 millones para 2030. Allied Market Research proyecta un escenario aún más optimista: $25,000 millones para 2032 con un crecimiento anual del 10.4%.</p>
+<p>La tecnología <strong>TIJ (inyección térmica)</strong> — la misma que usan nuestras impresoras — es el segmento de más rápido crecimiento dentro del mercado.</p>
+
+<h3>2.2 México: La Oportunidad</h3>
+<ul>
+  <li><strong>Mayor crecimiento en Norteamérica</strong> en el mercado de codificación y marcaje.</li>
+  <li>Norteamérica generó $5,421 millones de dólares en ingresos en 2024.</li>
+  <li>La manufactura mexicana creció 5.2% anual en 2022 (vs. 2.3% promedio histórico).</li>
+  <li>El nearshoring puede agregar 3% adicional al PIB de México en los próximos 5 años.</li>
+  <li>El mercado de servicios de manufactura electrónica (EMS) proyecta crecer de $53,200 millones de dólares (2025) a $97,400 millones (2031).</li>
+</ul>
+
+<h3>2.3 Regulaciones que Impulsan la Demanda</h3>
+<p><strong>NOM-051-SCFI/SSA1-2010 (Alimentos):</strong> Todas las empresas de alimentos deben imprimir fecha de elaboración, caducidad y lote. Son más de 650,000 establecimientos en México. Las multas van de $3,000 a $300,000 MXN por incumplimiento.</p>
+<p><strong>NOM-137-SSA1-2024 (Farmacéutica):</strong> Serialización obligatoria en desarrollo. El sector farmacéutico crecerá al ritmo más alto del período. Las multas van de $5,000 a $2,000,000 MXN, con posible suspensión de licencia de manufactura.</p>
+
+<!-- 3. PRODUCTO -->
+<h2>3. Producto</h2>
+
+<h3>3.1 Modelos Seleccionados</h3>
+<p>Ofrecemos tres modelos que cubren desde el pequeño negocio hasta la planta industrial:</p>
+
+<table>
+  <thead>
+    <tr><th>Modelo</th><th>Pantalla</th><th>Conectividad</th><th>Precio</th><th>Margen</th></tr>
+  </thead>
+  <tbody>
+    <tr><td style="font-weight:600;color:var(--text);">M05 (Entry-level)</td><td>LCD 2.4"</td><td>USB</td><td>$2,190 MXN</td><td style="color:var(--success);">59%</td></tr>
+    <tr><td style="font-weight:600;color:var(--accent);">MT1 (Producto estrella)</td><td>Táctil 2.8"</td><td>Bluetooth</td><td>$4,490 MXN</td><td style="color:var(--success);">72%</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">MH08 (Premium)</td><td>2.5"</td><td>Bluetooth</td><td>$6,990 MXN</td><td style="color:var(--success);">77%</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Especificaciones comunes:</strong> Altura de impresión de 12.7mm (TIJ 2.5 estándar), resolución de 300-600 DPI, impresión en superficies curvas y cóncavas, cartuchos TIJ 2.5 compatibles con HP45 de 42mL, boot screen personalizable.</p>
+
+<h3>3.2 Estrategia de Lanzamiento</h3>
+<p><strong>Fase 1 (Meses 1-6):</strong> Lanzar el MT1 como producto estrella a $4,490 MXN. Cae exactamente en el rango de $4,000-$7,000 donde no hay marca fuerte. Pantalla táctil + Bluetooth es el equilibrio ideal de características.</p>
+<p><strong>Fase 2 (Meses 7-12):</strong> Agregar el MH08 para el segmento industrial a $6,990 MXN. Carcasa metálica para durabilidad en plantas de manufactura y farmacéuticas.</p>
+<p><strong>Fase 3 (Año 2):</strong> Introducir el M05 como modelo de entrada a $2,190 MXN a través de Amazon MX y canales retail.</p>
+
+<h3>3.3 Análisis de Márgenes</h3>
+<table>
+  <thead>
+    <tr><th>Modelo</th><th>Costo FOB (USD)</th><th>Costo Desembarcado (MXN)</th><th>Precio Venta (MXN)</th><th>Margen Bruto</th></tr>
+  </thead>
+  <tbody>
+    <tr><td style="font-weight:600;color:var(--text);">M05</td><td>$37.50</td><td>~$900</td><td>$2,190</td><td style="color:var(--success);">59%</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">MT1</td><td>$52.50</td><td>~$1,265</td><td>$4,490</td><td style="color:var(--success);">72%</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">MH08</td><td>$67.50</td><td>~$1,630</td><td>$6,990</td><td style="color:var(--success);">77%</td></tr>
+  </tbody>
+</table>
+<p style="font-size:14px;color:var(--text-secondary);">Costo desembarcado incluye: FOB + tarifa arancelaria (~5-15%) + flete (~$250 MXN/unidad) + consolidación. Basado en pedido de 20 unidades.</p>
+
+<!-- 4. MODELO DE CONSUMIBLES -->
+<h2>4. Modelo de Consumibles (Tintas)</h2>
+
+<p>La impresora es el vehículo de entrada. <strong>Las tintas son el negocio.</strong> Cada cliente que compra una impresora se convierte en comprador recurrente de cartuchos TIJ 2.5. El estándar HP45 compatible nos da acceso a un ecosistema amplio de proveedores, manteniendo costos bajos y márgenes altos.</p>
+
+<h3>4.1 Tipos de Tinta</h3>
+<table>
+  <thead>
+    <tr><th>Tipo</th><th>Superficies</th><th>Costo FOB</th><th>Precio MXN</th><th>Margen</th></tr>
+  </thead>
+  <tbody>
+    <tr><td style="font-weight:600;color:var(--text);">Base agua</td><td>Cartón, papel, madera</td><td>$4-8 USD</td><td>$250-350</td><td style="color:var(--success);">60-75%</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Solvente</td><td>Plástico, metal, vidrio</td><td>$6-12 USD</td><td>$400-550</td><td style="color:var(--success);">65-80%</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Grado alimenticio</td><td>Contacto directo alimentos</td><td>$12-18 USD</td><td>$600-800</td><td style="color:var(--success);">60-70%</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">UV invisible</td><td>Anti-falsificación</td><td>$15-25 USD</td><td>$900-1,200</td><td style="color:var(--success);">70-85%</td></tr>
+  </tbody>
+</table>
+
+<h3>4.2 Consumo por Segmento</h3>
+<table>
+  <thead>
+    <tr><th>Segmento</th><th>Cartuchos/Mes</th><th>Cartuchos/Año</th><th>Gasto Anual (MXN)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td style="font-weight:600;color:var(--text);">Panadería / tortillería</td><td>3-5</td><td>36-60</td><td>$9,000-$21,000</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Manufactura media</td><td>5-10</td><td>60-120</td><td>$24,000-$66,000</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Logística / alto volumen</td><td>15-30</td><td>180-360</td><td>$45,000-$126,000</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Farmacéutica</td><td>8-15</td><td>96-180</td><td>$57,600-$144,000</td></tr>
+  </tbody>
+</table>
+
+<h3>4.3 Ingresos por Tintas vs. Hardware</h3>
+<p>Con 100 clientes en el primer año:</p>
+<ul>
+  <li><strong>Hardware</strong> (100 impresoras x $4,490): $449,000 MXN (venta única)</li>
+  <li><strong>Tintas</strong> (100 clientes x 48 cartuchos/año x $350): $1,680,000 MXN (recurrente)</li>
+</ul>
+<p style="font-weight:600;color:var(--accent);">Las tintas generan 3.7 veces más ingresos que el hardware. Y se repiten cada año.</p>
+
+<!-- 5. INDUSTRIAS OBJETIVO -->
+<h2>5. Industrias Objetivo</h2>
+
+<h3>5.1 Alimentos y Bebidas (Prioridad 1)</h3>
+<p>Con más de 650,000 establecimientos en México (INEGI 2023), de los cuales 200,000-300,000 tienen necesidad de codificación diaria, este es el mercado más grande. La NOM-051 obliga a imprimir fecha de elaboración, caducidad y lote. Las multas van de $3,000 a $300,000 MXN. Para el cliente, la impresora se paga sola en 2-4 semanas al eliminar costos de etiquetas manuales ($100-$750/día).</p>
+
+<h3>5.2 Manufactura (Prioridad 2)</h3>
+<p>México tiene más de 12,000 plantas manufactureras y 18,000 almacenes logísticos. La manufactura creció 5.2% anual en 2022 y el nearshoring trae 48% de toda la inversión extranjera directa. El dolor principal es que el marcado manual con plumón genera errores que causan rechazos de hasta $2,000,000 MXN/día en paros de línea por clientes OEM.</p>
+
+<h3>5.3 Farmacéutica (Prioridad 3)</h3>
+<p>El sector farmacéutico genera $450,000 millones de MXN al año. La NOM-137 desarrolla serialización obligatoria, con multas de hasta $2,000,000 MXN y suspensión de licencia. Los 156 laboratorios grandes, 2,400 farmacias y 800 farmacias de compounding necesitan codificación con tinta resistente a alcohol, glicerina y ciclos térmicos.</p>
+
+<!-- 6. COMPETENCIA -->
+<h2>6. Competencia</h2>
+
+<p>El mercado se divide en dos segmentos sin traslape:</p>
+
+<h3>6.1 Segmento Básico ($1,500-$3,500 MXN)</h3>
+<ul>
+  <li><strong>Bentsai B10:</strong> Producto maduro con presencia en 5 estados de México (CDMX, Monterrey, Guadalajara, Querétaro, Puebla). Su debilidad: firmware que bloquea cartuchos de terceros y documentación limitada en español.</li>
+  <li><strong>Rigel M1:</strong> Marca local con soporte personalizado pero información técnica limitada.</li>
+  <li><strong>Phezer PC11:</strong> Precio bajo vía Amazon, pero sin soporte local ni garantía confiable.</li>
+</ul>
+
+<h3>6.2 Segmento Industrial ($25,000+ MXN)</h3>
+<ul>
+  <li><strong>Videojet:</strong> Líder global con 400,000 instalaciones y 45 años de historia. Equipos de $25,000 a $150,000 MXN.</li>
+  <li><strong>Domino Printing:</strong> 25 oficinas globales, 8 centros de servicio en México. Equipos de $30,000 a $200,000 MXN.</li>
+  <li><strong>Markem-Imaje:</strong> 40+ años de trayectoria. Equipos de $20,000 a $120,000 MXN.</li>
+</ul>
+
+<h3>6.3 Nuestro Posicionamiento</h3>
+<p>Entre $4,000 y $7,000 MXN no hay marca confiable. Nosotros entramos con mejor producto, mejor soporte, documentación 100% en español, cartuchos abiertos (sin bloqueo de firmware), y una infraestructura tecnológica que ningún competidor puede replicar fácilmente.</p>
+
+<!-- 7. VENTAJA COMPETITIVA: TRANSFORMACIÓN DIGITAL -->
+<h2>7. Ventaja Competitiva: Transformación Digital</h2>
+
+<p style="font-size:20px;font-weight:600;color:var(--accent);">No solo vendemos impresoras. Operamos como empresa de tecnología.</p>
+
+<p>Somos la única empresa de impresoras portátiles en México con infraestructura de transformación digital completa. Esto nos permite operar con la eficiencia de una empresa de 20 personas siendo un equipo de 4.</p>
+
+<h3>7.1 Atención al Cliente con IA Multicanal</h3>
+<ul>
+  <li>Chatbots inteligentes desplegados en WhatsApp, Mercado Libre y sitio web.</li>
+  <li>Diagnóstico visual: los clientes pueden enviar fotografías de su problema y el chatbot diagnostica la situación y ofrece solución paso a paso.</li>
+  <li>Guías personalizadas según modelo de impresora y tipo de tinta.</li>
+  <li>Soporte disponible 24 horas al día, 7 días a la semana, sin necesidad de un equipo grande de atención.</li>
+  <li>Gestión automatizada de reembolsos, envíos de garantía y seguimiento post-venta.</li>
+</ul>
+
+<h3>7.2 Operaciones Automatizadas</h3>
+<ul>
+  <li>Listados de Mercado Libre creados y optimizados con IA: títulos con palabras clave de alto impacto, descripciones persuasivas, imágenes procesadas.</li>
+  <li>Pricing dinámico: monitoreo automático de precios de la competencia y ajuste en tiempo real para maximizar margen sin perder competitividad.</li>
+  <li>Gestión de inventario predictiva: el sistema anticipa cuándo reordenar basado en velocidad de venta.</li>
+  <li>Alertas automáticas de recompra de tintas: cuando el sistema estima que un cliente está por terminar su cartucho, le envía un recordatorio con opción de compra directa.</li>
+  <li>CRM automatizado que registra cada interacción, compra y necesidad de cada cliente.</li>
+</ul>
+
+<h3>7.3 Inteligencia de Mercado</h3>
+<ul>
+  <li>Análisis automático de reseñas de competidores en Mercado Libre y Amazon para detectar debilidades y oportunidades.</li>
+  <li>Detección de tendencias de demanda por sector industrial.</li>
+  <li>Tableros en tiempo real con ventas, márgenes, inventario y métricas de cada canal.</li>
+</ul>
+
+<h3>7.4 Sistemas Multi-Agente</h3>
+<p>Utilizamos múltiples agentes de inteligencia artificial orquestados para cubrir ventas, soporte, operaciones y análisis. Cada proceso crítico del negocio tiene su agente especializado. Los competidores (Bentsai, Rigel, Phezer) operan de forma tradicional: teléfono, correo electrónico, procesos manuales.</p>
+
+<div class="highlight-box">
+  <p style="margin:0;"><strong>Impacto cuantificado:</strong> Reducción de costos operativos del 60-70% frente a competencia tradicional. Tiempo de respuesta al cliente en minutos (no horas). Capacidad de escalar ventas sin escalar equipo proporcionalmente.</p>
+</div>
+
+<!-- 8. CANALES DE VENTA -->
+<h2>8. Canales de Venta</h2>
+
+<h3>8.1 Mercado Libre (60% de los ingresos)</h3>
+<p>Principal canal de venta. La categoría tiene más de 616 listados de impresoras portátiles. Ofrecemos financiamiento de 3 a 24 meses sin intereses. Nuestros listados se optimizan automáticamente con IA (títulos SEO, fotos profesionales) y el pricing dinámico nos mantiene siempre competitivos.</p>
+
+<h3>8.2 Venta Directa B2B (25% de los ingresos)</h3>
+<p>WhatsApp Business con chatbot inteligente. Contacto directo con jefes de almacén y supervisores de producción. Demos presenciales en Guadalajara y zona centro de México. Paquetes especiales para industria: impresora + 6 cartuchos + capacitación.</p>
+
+<h3>8.3 Sitio Web Propio (10% de los ingresos)</h3>
+<p>Plataforma de comercio electrónico con blog de contenido SEO enfocado en NOM-051, codificación industrial y soluciones por industria. Funciona también como canal de captura de prospectos B2B.</p>
+
+<h3>8.4 Amazon México (5% de los ingresos)</h3>
+<p>Canal complementario para el segmento más familiarizado con compras en línea.</p>
+
+<!-- 9. EQUIPO -->
+<h2>9. Equipo</h2>
+
+<table>
+  <thead>
+    <tr><th>Nombre</th><th>Rol</th><th>Responsabilidades</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="font-weight:600;color:var(--text);">Raul Zhou</td>
+      <td>Tecnología y Automatización</td>
+      <td>Listados automatizados, pricing dinámico, chatbot, CRM, tableros, sitio web. Ingeniero con Maestría en IA.</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;color:var(--text);">Kaori</td>
+      <td>Sourcing y Proveedores China</td>
+      <td>Relación con proveedores, negociación, control de calidad. Experiencia directa con manufactura china.</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;color:var(--text);">Diego</td>
+      <td>Operaciones y Logística</td>
+      <td>Logística, almacén, administración, agente aduanal, Padrón de Importadores.</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;color:var(--text);">Dante Vega</td>
+      <td>Ventas y Marketing</td>
+      <td>Marca personal, contenido, relaciones comerciales, demos, prospección B2B.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>El capital total comprometido es de $60,000-$100,000 MXN, distribuido equitativamente entre los 4 socios. El modelo es lean: no se requiere inversión adicional para el lanzamiento.</p>
+
+<!-- 10. ESTRUCTURA LEGAL -->
+<h2>10. Estructura Legal</h2>
+
+<h3>10.1 Figura Jurídica: SAS (Sociedad por Acciones Simplificada)</h3>
+<ul>
+  <li>Sin capital mínimo requerido.</li>
+  <li>Responsabilidad limitada para todos los socios.</li>
+  <li>Constitución en línea, sin necesidad de notario.</li>
+  <li>Costo de constitución: prácticamente gratuito (solo RFC y e-firma).</li>
+  <li>Tiempo de constitución: 1-2 semanas.</li>
+</ul>
+
+<h3>10.2 Requisitos para Importar</h3>
+<ol>
+  <li>RFC activo con e-firma vigente.</li>
+  <li>Inscripción en el Padrón de Importadores del SAT (trámite en línea, 6 días hábiles).</li>
+  <li>Buzón Tributario validado.</li>
+  <li>Agente aduanal designado.</li>
+  <li>Cumplimiento de NOM-019-SCFI-1998 (seguridad de equipos electrónicos).</li>
+</ol>
+
+<h3>10.3 Cronograma de Constitución</h3>
+<table>
+  <thead><tr><th>Semana</th><th>Acción</th></tr></thead>
+  <tbody>
+    <tr><td style="font-weight:600;color:var(--text);">Semana 1</td><td>Constituir SAS en línea + obtener RFC</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Semana 2</td><td>Tramitar e-firma SAT + activar Buzón Tributario</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Semana 3</td><td>Inscripción en Padrón de Importadores</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Semana 4</td><td>Designar agente aduanal + abrir cuenta bancaria empresarial</td></tr>
+  </tbody>
+</table>
+
+<!-- 11. PROYECCIÓN FINANCIERA -->
+<h2>11. Proyección Financiera</h2>
+
+<h3>11.1 Inversión Inicial ($80,000 MXN)</h3>
+<table>
+  <thead><tr><th>Concepto</th><th>Monto (MXN)</th></tr></thead>
+  <tbody>
+    <tr><td style="font-weight:600;color:var(--text);">Primer pedido (20 MT1 + 50 cartuchos)</td><td>$35,000</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Constitución SAS + trámites</td><td>$2,000</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Marketing inicial</td><td>$8,000</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Flete + despacho aduanal</td><td>$10,000</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Capital de trabajo</td><td>$10,000</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Contingencia</td><td>$15,000</td></tr>
+    <tr style="font-weight:700;"><td style="font-weight:700;color:var(--text);">Total</td><td style="font-weight:700;">$80,000</td></tr>
+  </tbody>
+</table>
+
+<h3>11.2 Proyección a 6 Meses (Escenario Conservador)</h3>
+<table>
+  <thead>
+    <tr><th>Mes</th><th>Impresoras</th><th>Cartuchos</th><th>Ventas Totales (MXN)</th><th>Utilidad Bruta (MXN)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>5</td><td>15</td><td>$27,700</td><td style="color:var(--success);">$18,900</td></tr>
+    <tr><td>2</td><td>5</td><td>30</td><td>$32,950</td><td style="color:var(--success);">$22,350</td></tr>
+    <tr><td>3</td><td>15</td><td>75</td><td>$93,600</td><td style="color:var(--success);">$63,600</td></tr>
+    <tr><td>4</td><td>15</td><td>120</td><td>$109,350</td><td style="color:var(--success);">$73,950</td></tr>
+    <tr><td>5</td><td>25</td><td>195</td><td>$180,500</td><td style="color:var(--success);">$126,100</td></tr>
+    <tr><td>6</td><td>25</td><td>280</td><td>$210,250</td><td style="color:var(--success);">$148,650</td></tr>
+    <tr style="font-weight:700;"><td style="font-weight:700;color:var(--text);">Total</td><td style="font-weight:700;">90</td><td style="font-weight:700;">715</td><td style="font-weight:700;">$654,350</td><td style="color:var(--success);font-weight:700;">$453,550</td></tr>
+  </tbody>
+</table>
+
+<h3>11.3 Proyección Año 1 Completo</h3>
+<table>
+  <thead><tr><th>Métrica</th><th>Valor</th></tr></thead>
+  <tbody>
+    <tr><td style="font-weight:600;color:var(--text);">Impresoras vendidas</td><td>250 unidades</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Ingresos por hardware</td><td>$1,122,500 MXN</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Cartuchos vendidos</td><td>3,600 unidades</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Ingresos por tintas</td><td>$1,260,000 MXN</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Ventas totales</td><td style="font-weight:700;">$2,382,500 MXN (~$140,000 USD)</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Costo de ventas total</td><td>$782,000 MXN</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Utilidad bruta</td><td style="color:var(--success);font-weight:700;">$1,600,500 MXN (67%)</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Gastos operativos estimados</td><td>~$300,000 MXN</td></tr>
+    <tr><td style="font-weight:600;color:var(--text);">Utilidad operativa estimada</td><td style="color:var(--success);font-weight:700;">~$1,300,000 MXN (~$76,500 USD)</td></tr>
+  </tbody>
+</table>
+
+<div class="note-box">
+  Nota: Estas proyecciones son antes de comisiones de marketplace (~18% en Mercado Libre) e impuestos. Las comisiones aplican principalmente al 60% de ventas canalizadas por Mercado Libre. Ventas B2B directas y por sitio web propio no tienen comisión de marketplace.
+</div>
+
+<!-- 12. PLAN DE ACCIÓN 90 DÍAS -->
+<h2>12. Plan de Acción — Primeros 90 Días</h2>
+
+<h3>Semanas 1-2: Fundación</h3>
+<ul>
+  <li>Constituir SAS en línea.</li>
+  <li>Obtener RFC + e-firma.</li>
+  <li>Abrir cuenta bancaria empresarial.</li>
+  <li>Negociar con proveedores en China: confirmar especificaciones y precios del MT1 y MH08.</li>
+  <li>Ordenar muestras (2-3 unidades de cada modelo).</li>
+</ul>
+
+<h3>Semanas 3-4: Preparación Legal</h3>
+<ul>
+  <li>Inscripción en el Padrón de Importadores.</li>
+  <li>Designar agente aduanal.</li>
+  <li>Confirmar fracción arancelaria 8443.32.09 en SIAVI.</li>
+  <li>Evaluar cumplimiento de NOM-019.</li>
+</ul>
+
+<h3>Semanas 5-6: Primer Pedido</h3>
+<ul>
+  <li>Colocar pedido: 20 MT1 + 100 cartuchos (mezcla de base agua y solvente).</li>
+  <li>Coordinar flete marítimo LCL a Lázaro Cárdenas o Manzanillo.</li>
+  <li>Diseñar packaging con marca propia.</li>
+  <li>Configurar automatización de Mercado Libre (listados, títulos, pricing).</li>
+</ul>
+
+<h3>Semanas 7-8: Pre-Lanzamiento</h3>
+<ul>
+  <li>Crear listados optimizados en Mercado Libre (fotos profesionales, descripciones SEO).</li>
+  <li>Configurar chatbot de WhatsApp para preventa y soporte.</li>
+  <li>Generar contenido: videos demostrativos, comparativas, testimoniales.</li>
+  <li>Preparar paquetes B2B (impresora + 6 cartuchos + capacitación).</li>
+</ul>
+
+<h3>Semanas 9-10: Lanzamiento</h3>
+<ul>
+  <li>Activar listados en Mercado Libre.</li>
+  <li>Primeras 5-10 ventas con precio introductorio para generar reseñas.</li>
+  <li>Ajustar listados según métricas reales de conversión.</li>
+  <li>Contactar primeros 10 prospectos B2B.</li>
+</ul>
+
+<h3>Semanas 11-12: Optimización</h3>
+<ul>
+  <li>Analizar métricas: conversión, ticket promedio, calificaciones.</li>
+  <li>Activar pricing dinámico basado en competencia.</li>
+  <li>Reordenar inventario (segundo pedido basado en demanda real).</li>
+  <li>Planear incorporación del MH08 para el mes 7.</li>
+</ul>
+
+<h3>Semana 13: Cierre del Primer Trimestre</h3>
+<ul>
+  <li>Revisar tablero completo: ventas, márgenes, inventario, satisfacción del cliente.</li>
+  <li>Decisión: escalar pedido o ajustar estrategia.</li>
+</ul>
+
+<!-- 13. RIESGOS Y MITIGACIÓN -->
+<h2>13. Riesgos y Mitigación</h2>
+
+<table class="risk-table">
+  <thead>
+    <tr><th>Riesgo</th><th>Probabilidad</th><th>Impacto</th><th>Mitigación</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Aranceles suben (reforma 2025 modificó tasas)</td>
+      <td>Media</td>
+      <td>Alto</td>
+      <td>Verificar SIAVI antes de cada pedido. Considerar modalidad DDP como alternativa.</td>
+    </tr>
+    <tr>
+      <td>Competidor baja precios agresivamente</td>
+      <td>Alta</td>
+      <td>Medio</td>
+      <td>Pricing dinámico automático. Diferenciación por servicio y tecnología, no solo precio.</td>
+    </tr>
+    <tr>
+      <td>Producto defectuoso en primer lote</td>
+      <td>Media</td>
+      <td>Alto</td>
+      <td>Ordenar muestras antes del lote grande. Garantía del proveedor. Buffer de contingencia.</td>
+    </tr>
+    <tr>
+      <td>Bentsai mejora su soporte en México</td>
+      <td>Baja</td>
+      <td>Medio</td>
+      <td>Movernos más rápido. La infraestructura tecnológica es difícil de replicar.</td>
+    </tr>
+    <tr>
+      <td>Mercado más lento de lo esperado</td>
+      <td>Media</td>
+      <td>Medio</td>
+      <td>Modelo lean. Punto de equilibrio con 5 unidades/mes. Capital suficiente para 6 meses sin ventas.</td>
+    </tr>
+    <tr>
+      <td>Problemas aduanales o de importación</td>
+      <td>Baja</td>
+      <td>Alto</td>
+      <td>Agente aduanal experimentado. Clasificación arancelaria confirmada previamente.</td>
+    </tr>
+    <tr>
+      <td>Tipo de cambio desfavorable</td>
+      <td>Media</td>
+      <td>Medio</td>
+      <td>Pricing dinámico absorbe variaciones. Comprar en lotes cuando el tipo de cambio es favorable.</td>
+    </tr>
+    <tr>
+      <td>Fragmentación del equipo</td>
+      <td>Baja</td>
+      <td>Crítico</td>
+      <td>Acuerdo de socios escrito. SAS constituida formalmente. Roles y responsabilidades claros.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="margin-top:80px;text-align:center;padding:40px 0;border-top:1px solid var(--border);">
+  <div class="gold-line-center"></div>
+  <p style="font-size:18px;color:var(--text-secondary);">Documento preparado en marzo de 2026.</p>
+  <p style="font-size:16px;color:var(--text-secondary);margin-top:8px;">Raul Zhou &middot; Kaori &middot; Diego &middot; Dante Vega</p>
+</div>
+
+</div><!-- end #plan -->
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+(function() {
+  // ---- Navigation Dots ----
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('navDots');
+  const deck = document.getElementById('deck');
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', () => {
+      slides[i].scrollIntoView({ behavior: 'smooth' });
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = dotsContainer.querySelectorAll('.nav-dot');
+
+  // ---- Intersection Observer: Slide tracking ----
+  const slideObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = parseInt(entry.target.dataset.slide);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { root: deck, threshold: 0.5 });
+
+  slides.forEach(s => slideObserver.observe(s));
+
+  // ---- Intersection Observer: Fade-up ----
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+  // ---- Intersection Observer: Table rows ----
+  const tableObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const rows = entry.target.querySelectorAll('tbody tr');
+        rows.forEach((row, i) => {
+          setTimeout(() => row.classList.add('visible'), i * 80);
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('table').forEach(t => tableObserver.observe(t));
+
+  // ---- Intersection Observer: Progress bars ----
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bars = entry.target.querySelectorAll('[data-width]');
+        bars.forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.slide, #plan').forEach(s => barObserver.observe(s));
+
+  // Hide dots when scrolled past deck
+  const planDivider = document.querySelector('.plan-divider');
+  if (planDivider) {
+    const dividerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        dotsContainer.style.opacity = entry.isIntersecting ? '0' : '1';
+        dotsContainer.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
+      });
+    }, { threshold: 0.1 });
+    dividerObserver.observe(planDivider);
+
+    // Also hide when in plan section
+    const plan = document.getElementById('plan');
+    if (plan) {
+      const planObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            dotsContainer.style.opacity = '0';
+            dotsContainer.style.pointerEvents = 'none';
+          }
+        });
+      }, { threshold: 0.05 });
+      planObserver.observe(plan);
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
